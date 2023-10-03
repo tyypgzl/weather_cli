@@ -26,7 +26,7 @@ class WeatherCommandRunner extends CommandRunner<int> {
   final OpenWeatherClient _client;
 
   @override
-  Future<int?> run(Iterable<String> args) async {
+  Future<int> run(Iterable<String> args) async {
     final topLevelResults = parse(args);
     final city = topLevelResults['city'];
 
