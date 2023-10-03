@@ -25,3 +25,11 @@ dart pub global activate --source path .
 ```shell
 weather --city=London
 ```
+
+## Result
+
+<table>
+  <tr>
+     <td><img src="screenshots/result.png"></td>
+  </tr>
+</table>
