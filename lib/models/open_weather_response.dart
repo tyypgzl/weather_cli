@@ -17,49 +17,50 @@ final class OpenWeatherResponse with EquatableMixin {
     this.cod,
   });
 
-  factory OpenWeatherResponse.data() {
-    return const OpenWeatherResponse(
-      coord: Coord(lat: 37.1983, lon: 38.2059),
-      weather: [
-        Weather(
-          id: 800,
-          main: 'Clear',
-          description: 'clear sky',
-          icon: '01d',
+  factory OpenWeatherResponse.data() => const OpenWeatherResponse(
+        coord: Coord(
+          lat: 37.1983,
+          lon: 38.2059,
         ),
-      ],
-      base: 'stations',
-      main: Main(
-        temp: 286.89,
-        feelsLike: 285.73,
-        tempMin: 286.89,
-        tempMax: 286.89,
-        pressure: 1021,
-        humidity: 54,
-        seaLevel: 1021,
-        grndLevel: 893,
-      ),
-      visibility: 10000,
-      wind: Wind(
-        speed: 1.21,
-        deg: 352,
-        gust: 1.7,
-      ),
-      clouds: Clouds(
-        all: 6,
-      ),
-      dt: 1696398205,
-      sys: Sys(
-        country: 'TR',
-        sunrise: 1696390137,
-        sunset: 1696432261,
-      ),
-      timezone: 10800,
-      id: 315795,
-      name: 'Elbistan',
-      cod: 200,
-    );
-  }
+        weather: [
+          Weather(
+            id: 800,
+            main: 'Clear',
+            description: 'clear sky',
+            icon: '01d',
+          ),
+        ],
+        base: 'stations',
+        main: Main(
+          temp: 286.89,
+          feelsLike: 285.73,
+          tempMin: 286.89,
+          tempMax: 286.89,
+          pressure: 1021,
+          humidity: 54,
+          seaLevel: 1021,
+          grndLevel: 893,
+        ),
+        visibility: 10000,
+        wind: Wind(
+          speed: 1.21,
+          deg: 352,
+          gust: 1.7,
+        ),
+        clouds: Clouds(
+          all: 6,
+        ),
+        dt: 1696398205,
+        sys: Sys(
+          country: 'TR',
+          sunrise: 1696390137,
+          sunset: 1696432261,
+        ),
+        timezone: 10800,
+        id: 315795,
+        name: 'Elbistan',
+        cod: 200,
+      );
 
   factory OpenWeatherResponse.fromJson(Map<String, dynamic> json) {
     return OpenWeatherResponse(
@@ -107,15 +108,15 @@ final class OpenWeatherResponse with EquatableMixin {
 
   Map<String, dynamic> toJson() {
     return {
-      'coord': coord,
-      'weather': weather,
+      'coord': coord?.toJson(),
+      'weather': weather?.map((e) => e.toJson()).toList(),
       'base': base,
-      'main': main,
+      'main': main?.toJson(),
       'visibility': visibility,
-      'wind': wind,
-      'clouds': clouds,
+      'wind': wind?.toJson(),
+      'clouds': clouds?.toJson(),
       'dt': dt,
-      'sys': sys,
+      'sys': sys?.toJson(),
       'timezone': timezone,
       'id': id,
       'name': name,
