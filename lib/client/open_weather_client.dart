@@ -34,7 +34,7 @@ final class OpenWeatherClient {
         },
       );
 
-      final response = await http.get(uri);
+      final response = await _client.get(uri);
       if (response.statusCode == 200) {
         final json = await Isolate.run(() => jsonDecode(response.body));
         if (json is Map<String, dynamic>) {

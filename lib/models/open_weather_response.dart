@@ -1,4 +1,6 @@
-final class OpenWeatherResponse {
+import 'package:equatable/equatable.dart';
+
+final class OpenWeatherResponse with EquatableMixin {
   const OpenWeatherResponse({
     this.coord,
     this.weather,
@@ -14,6 +16,50 @@ final class OpenWeatherResponse {
     this.name,
     this.cod,
   });
+
+  factory OpenWeatherResponse.data() {
+    return const OpenWeatherResponse(
+      coord: Coord(lat: 37.1983, lon: 38.2059),
+      weather: [
+        Weather(
+          id: 800,
+          main: 'Clear',
+          description: 'clear sky',
+          icon: '01d',
+        ),
+      ],
+      base: 'stations',
+      main: Main(
+        temp: 286.89,
+        feelsLike: 285.73,
+        tempMin: 286.89,
+        tempMax: 286.89,
+        pressure: 1021,
+        humidity: 54,
+        seaLevel: 1021,
+        grndLevel: 893,
+      ),
+      visibility: 10000,
+      wind: Wind(
+        speed: 1.21,
+        deg: 352,
+        gust: 1.7,
+      ),
+      clouds: Clouds(
+        all: 6,
+      ),
+      dt: 1696398205,
+      sys: Sys(
+        country: 'TR',
+        sunrise: 1696390137,
+        sunset: 1696432261,
+      ),
+      timezone: 10800,
+      id: 315795,
+      name: 'Elbistan',
+      cod: 200,
+    );
+  }
 
   factory OpenWeatherResponse.fromJson(Map<String, dynamic> json) {
     return OpenWeatherResponse(
@@ -44,6 +90,7 @@ final class OpenWeatherResponse {
       cod: json['cod'] as int?,
     );
   }
+
   final Coord? coord;
   final List<Weather>? weather;
   final String? base;
@@ -81,9 +128,28 @@ final class OpenWeatherResponse {
       ',base: $base,main: $main,visibility: $visibility,wind: $wind'
       ',clouds: $clouds,dt: $dt,sys: $sys,timezone: $timezone'
       ',id: $id,name: $name,cod: $cod)';
+
+  @override
+  List<Object?> get props {
+    return [
+      coord,
+      weather,
+      base,
+      main,
+      visibility,
+      wind,
+      clouds,
+      dt,
+      sys,
+      timezone,
+      id,
+      name,
+      cod,
+    ];
+  }
 }
 
-final class Coord {
+final class Coord with EquatableMixin {
   const Coord({
     this.lon,
     this.lat,
@@ -107,9 +173,12 @@ final class Coord {
 
   @override
   String toString() => 'Coord(lon: $lon,lat: $lat)';
+
+  @override
+  List<Object?> get props => [lon, lat];
 }
 
-final class Weather {
+final class Weather with EquatableMixin {
   const Weather({
     this.id,
     this.main,
@@ -142,9 +211,12 @@ final class Weather {
   @override
   String toString() =>
       'Weather(id: $id,main: $main,description: $description,icon: $icon)';
+
+  @override
+  List<Object?> get props => [id, main, description, icon];
 }
 
-final class Main {
+final class Main with EquatableMixin {
   const Main({
     this.temp,
     this.feelsLike,
@@ -195,9 +267,23 @@ final class Main {
       'Main(temp: $temp,feelsLike: $feelsLike,tempMin: $tempMin'
       ',tempMax: $tempMax,pressure: $pressure,humidity: $humidity'
       ',seaLevel: $seaLevel,grndLevel: $grndLevel)';
+
+  @override
+  List<Object?> get props {
+    return [
+      temp,
+      feelsLike,
+      tempMin,
+      tempMax,
+      pressure,
+      humidity,
+      seaLevel,
+      grndLevel,
+    ];
+  }
 }
 
-final class Wind {
+final class Wind with EquatableMixin {
   const Wind({
     this.speed,
     this.deg,
@@ -225,9 +311,12 @@ final class Wind {
 
   @override
   String toString() => 'Wind(speed: $speed,deg: $deg,gust: $gust)';
+
+  @override
+  List<Object?> get props => [speed, deg, gust];
 }
 
-final class Clouds {
+final class Clouds with EquatableMixin {
   const Clouds({
     this.all,
   });
@@ -247,10 +336,13 @@ final class Clouds {
 
   @override
   String toString() => 'Clouds(all: $all)';
+
+  @override
+  List<Object?> get props => [all];
 }
 
-class Sys {
-  Sys({
+final class Sys with EquatableMixin {
+  const Sys({
     this.country,
     this.sunrise,
     this.sunset,
@@ -263,9 +355,9 @@ class Sys {
       sunset: json['sunset'] as int?,
     );
   }
-  String? country;
-  int? sunrise;
-  int? sunset;
+  final String? country;
+  final int? sunrise;
+  final int? sunset;
 
   Map<String, dynamic> toJson() {
     return {
@@ -278,4 +370,7 @@ class Sys {
   @override
   String toString() =>
       'Sys(country: $country,sunrise: $sunrise,sunset: $sunset)';
+
+  @override
+  List<Object?> get props => [country, sunrise, sunset];
 }
